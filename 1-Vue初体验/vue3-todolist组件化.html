@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue3todolist组件化</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            inputValue: "",
+            list: [],
+            src: [
+              {title:"第一張",src:"/image/1.jpg"},
+              {title:"第二張",src:"/image/2.jpg"},
+              {title:"第三張",src:"/image/3.jpg"},
+              {title:"第四張",src:"/image/4.jpg"},
+              {title:"第五張",src:"/image/5.jpg"},
+              
+            ],
+          };
+        },
+        methods: {
+          handleAddItem() {
+            this.list.push(this.inputValue);
+            this.inputValue = "";
+          },
+        },
+        template: `
+                <div>
+                    <input v-model="inputValue">
+                    <button v-on:click="handleAddItem" v-bind:title="inputValue">增加</button>
+                    <ul style="list-style:none">
+                        <todo-item 
+                        v-for="(item,index) of list"
+                        v-bind:content="item"
+                        :index="index"
+                        />
+                    </ul>
+
+                    <ul style="list-style:none">
+                        <todo-img
+                        v-for="(item,index) of src"
+                        :src="item.src"
+                        :title="item.title"
+                        
+                         />
+                            
+                    </ul>
+
+                </div>
+            `,
+      });
+      app.component("todo-item", {
+        props: ["content", "index"],
+        template: "<li >{{index}}---{{content}}</li>",
+      });
+      app.component("todo-img", {
+        props: ["title","src"],
+        template: `
+        <div class="imgclass">
+            <h2>{{title}}</h2>
+            <img :src="src">
+        </div>
+
+        `,
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
