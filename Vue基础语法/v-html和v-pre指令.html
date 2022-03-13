@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-html和v-pre指令</title>
+  </head>
+  <body>
+    <div id="root">
+      <ul>
+        <p><strong>错误的做法</strong></p>
+        <li>{{age}}</li>
+        <li>{{link}}</li>
+        <p><strong>正确的做法</strong></p>
+        <li v-html="age"></li>
+        <li v-html="link"></li>
+      </ul>
+
+      <!-- 错误的做法 -->
+      <p>Vue真有趣，特别是{{Mustache}}表达式</p>
+
+      <!-- 正确的做法 -->
+      <p v-pre>Vue真有趣，特别是{{Mustache}}表达式</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: "hello world",
+            age: "<strong>13</strong>",
+            link: '<a href="https://www.baidu.com">百度一下</a>',
+            info: "Vue真有趣，特别是{{Mustache}}表达式",
+          };
+        },
+        methods: {
+          customMethod(str) {
+            //字符串逆转，用逗号分隔
+            return str.split("").reverse().join(",");
+          },
+        },
+        // template: `<h2>{{firstName}}</h2>`,
+      });
+      const vm = app.mount("#root");
+    </script>
+  </body>
+</html>

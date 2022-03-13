@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue插值表达式</title>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 用插值表达式直接显示变量 -->
+      <p>{{firstName}} {{lastName}} {{age}}岁</p>
+
+      <strong>加粗文字</strong>
+
+      <!-- 使用访问变量的属性 -->
+      <p>{{firstName.length}}</p>
+
+      <!-- 字符串的拼接 -->
+      <p>{{firstName+ "------"+lastName}}</p>
+
+      <!-- 简单的算术运算 -->
+      <p>{{count*2}}</p>
+
+      <!-- 三目运算 -->
+      <p>{{firstName==="hello world"?'ok':'no'}}</p>
+
+      <!-- 调用自定义函数 -->
+      <p>{{customMethod(lastName)}}</p>
+
+      <!-- 调用JavaScript自带函数 -->
+      <p>{{Math.random()*11}}</p>
+
+      <!-- 使用v-html来渲染标记的值 -->
+      <p v-html="age"></p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            firstName: "hello world",
+            lastName: "Curry",
+            age: 13,
+            count: 12,
+          };
+        },
+        methods: {
+          customMethod(str) {
+            //字符串逆转，用逗号分隔
+            return str.split("").reverse().join(",");
+          },
+        },
+        // template: `<h2>{{firstName}}</h2>`,
+      });
+      const vm = app.mount("#root");
+    </script>
+  </body>
+</html>

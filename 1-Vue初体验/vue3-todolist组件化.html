@@ -8,10 +8,7 @@
   </head>
   <body>
     <div id="app"></div>
-
-
     <script src="https://unpkg.com/vue@next"></script>
-
     <script>
       const app = Vue.createApp({
         data() {
@@ -19,12 +16,11 @@
             inputValue: "",
             list: [],
             src: [
-              {title:"第一張",src:"/image/1.jpg"},
-              {title:"第二張",src:"/image/2.jpg"},
-              {title:"第三張",src:"/image/3.jpg"},
-              {title:"第四張",src:"/image/4.jpg"},
-              {title:"第五張",src:"/image/5.jpg"},
-              
+              { title: "第一張", src: "/image/1.jpg" },
+              { title: "第二張", src: "/image/2.jpg" },
+              { title: "第三張", src: "/image/3.jpg" },
+              { title: "第四張", src: "/image/4.jpg" },
+              { title: "第五張", src: "/image/5.jpg" },
             ],
           };
         },
@@ -45,17 +41,13 @@
                         :index="index"
                         />
                     </ul>
-
                     <ul style="list-style:none">
                         <todo-img
                         v-for="(item,index) of src"
                         :src="item.src"
                         :title="item.title"
-                        
-                         />
-                            
+                         /> 
                     </ul>
-
                 </div>
             `,
       });
@@ -64,13 +56,12 @@
         template: "<li >{{index}}---{{content}}</li>",
       });
       app.component("todo-img", {
-        props: ["title","src"],
+        props: ["title", "src"],
         template: `
         <div class="imgclass">
             <h2>{{title}}</h2>
             <img :src="src">
         </div>
-
         `,
       });
       app.mount("#app");

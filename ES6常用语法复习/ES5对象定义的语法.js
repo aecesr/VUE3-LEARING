@@ -7,11 +7,12 @@
 //     age: age,
 //     height: height
 // }
+//定义对象
 function Player() {
   this.name = name;
   this.age = age;
 }
-
+//定义对象的成员函数toPrint
 Player.prototype.toPrint = function () {
   console.log(this.name + "-----------" + this.age);
 };

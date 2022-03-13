@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if和v-show</title>
+  </head>
+  <body>
+    <div id="root">
+        <!-- 直接删除 -->
+        <h2 v-if="show">{{message}}</h2>
+        
+        <!-- display:none -->
+        <h2 v-show="show">{{message}}</h2>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: "hello world",
+            show:true,
+          };
+        },
+        template: `<h2>{{message}}</h2>`,
+      });
+      const vm = app.mount("#root");
+    </script>
+  </body>
+</html>

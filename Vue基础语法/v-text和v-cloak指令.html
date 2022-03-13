@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-text和v-cloak指令</title>
+    <style>
+        /* v-clock指令的样式，在DOM节点渲染完成之前不显示 */
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- 网速慢的时候存在闪屏问题 -->
+        <h2>{{message}}</h2>
+        <!-- 使用v-text解决 -->
+        <h2 v-text="message"></h2>
+
+        <!-- 既可以插值，又可以解决闪屏v-cloak -->
+        <h2 v-cloak>你好 {{message}}</h2>
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app=Vue.createApp({
+            data(){
+                return{
+                    message:"hello world"
+                };
+            },
+        });
+        const vm= app.mount("#root")
+    </script>
+</body>
+</html>
