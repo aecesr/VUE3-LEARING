@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>属性侦听的深入侦听</title>
+  </head>
+
+  <body>
+    <div id="app">
+      姓：<input v-model.lazy="player.firstName" type="text" /> 
+      名：<input v-model.lazy="player.lastName"  type="text" />
+      <h2>全名是：{{player.fullName}}</h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      let app = Vue.createApp({
+        data() {
+          return {
+            player:{
+                firstName: "",
+                lastName: "",
+                fullName: "",
+            }
+          };
+        },
+        watch: {
+            player: {
+            handler(newValue, oldValue) {
+              console.log("handler被调用");
+              this.player.fullName="默认名字";
+            //   this.player.fullName = newValue.firstName + " " + oldValue.lastName;
+            },
+            //页面加载完毕就出发handler（数据初始化）
+            immediate:true,
+            // 可以深度检测到player对象属性值的变化
+            deep:true,
+            
+          },
+        },
+      });
+      let vm = app.mount("#app");
+    </script>
+  </body>
+
+  <html></html>
+</html>

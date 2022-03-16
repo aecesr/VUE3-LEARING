@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        姓：<input v-model.lazy="firstName" type="text" />
+        名：<input v-model.lazy="lastName" type="text" />
+        <!-- 使用计算属性的结果  只调用一次-->
+        <h2>姓名为：{{fullName}}</h2>
+        <h2>姓名为：{{fullName}}</h2>
+        <h2>姓名为：{{fullName}}</h2>
+
+        <!-- 使用调用方法的结果 一直重复调用-->
+        <h2>姓名为：{{getFullName()}}</h2>
+        <h2>姓名为：{{getFullName()}}</h2>
+        <h2>姓名为：{{getFullName()}}</h2>
+        <h2>姓名为：{{getFullName()}}</h2>
+  
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+            return {
+                firstName:"",
+                lastName:"",
+            };
+            },
+            computed:{
+                // 实际是个简写
+                // fullName:function(){
+                    // console.log("计算属性被调用");
+                    // return this.firstName+this.lastName
+                // }
+            },
+            // 完整的写法
+            getFullName:{
+                get () {
+                    console.log("计算属性被调用");
+                    return this.firstName+this.lastName
+                }
+            },
+            methods:{
+                getFullName(){
+                    console.log("方法被调用");
+                    return this.firstName+this.lastName
+                
+                }
+            }
+            
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

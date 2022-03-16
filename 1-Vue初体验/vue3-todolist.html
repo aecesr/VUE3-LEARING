@@ -6,16 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vue3实现todolist-了解循环和双向绑定</title>
     <style>
-      .red {
+      /* .red {
         color: red;
       }
       .green {
         color: green;
+      } */
+      .ok{
+        color: red;
+      }
+      .no{
+        color: green;
+      }
+      .finished{
+        text-decoration: line-through;
+        color: red;
       }
     </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+
+      <div>
+        <input v-model="inputValue">
+        <button v-on:click="handleAddItem">增加</button>
+        <ul>
+            <li v-for="(item,index) of list" :style="'color:'+(item>10?'red':'green')+';'">
+                <a 
+                @click="isok(index)"
+                 :class="{finished:item.finished}"
+                 >{{item.title}}</a>
+            </li>
+        </ul>
+    </div>
+    </div>
 
     <script src="https://unpkg.com/vue@next"></script>
 
@@ -24,26 +48,29 @@
         data() {
           return {
             inputValue: "",
-            list: ["1", "2", "3"],
+            list: [
+              {
+                title:"aaa",
+                finished:true,
+              },
+              {
+                title:"bbb",
+                finished:true,
+              }
+            ],
             in: 0,
           };
         },
         methods: {
           handleAddItem() {
-            this.list.push(this.inputValue);
+            this.list.push({title:this.inputValue,finished:false});
           },
+          isok(indx){
+            this.list[indx].finished=!this.list[indx].finished;
+          }
         },
-        template: `
-            <div>
-                <input v-model="inputValue">
-                <button v-on:click="handleAddItem">增加</button>
-                <ul>
-                    <li v-for="(item,index) of list" :style="'color:'+(item>10?'red':'green')+';'">
-                        {{item}}
-                    </li>
-                </ul>
-            </div>
-            `,
+      
+    
       }).mount("#app");
     </script>
   </body>
