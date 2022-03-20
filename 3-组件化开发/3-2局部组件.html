@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <you-component></you-component>
+    </div>
+    <div id="app2">
+        <my-component></my-component>
+        <you-component></you-component>
+    </div>
+
+    <template id="YouComponent">
+        <h3>模板视图与Vue实例定义分离--优雅写法</h3>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            components:{
+                MyComponent:{
+                    template: `<h3>局部组件</h3>`
+                },
+                YouComponent:{
+                    template:`#YouComponent`
+                }
+            }
+        });
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

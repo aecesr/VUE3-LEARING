@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <parent></parent>
+    </div>
+
+    <template id="Child3">
+      <div
+        style="
+          width: 100px;
+          height: 100px;
+          background: red;
+          text-align: center;
+          line-height: 80px;
+        "
+      >
+        <button>点击3</button>
+      </div>
+    </template>
+
+    <template id="Child2">
+      <div
+        style="
+          width: 200px;
+          height: 200px;
+          background: green;
+          text-align: center;
+          line-height: 80px;
+        "
+      >
+        <button>
+          点击2
+          <child3></child3>
+        </button>
+      </div>
+    </template>
+
+    <template id="Child1">
+      <div
+        style="
+          width: 300px;
+          height: 300px;
+          background: black;
+          text-align: center;
+          line-height: 100px;
+        "
+      >
+        <button>
+          点击1
+          <child2></child2>
+        </button>
+      </div>
+    </template>
+
+    <template id="Parent">
+      <h1>你好，我是出口</h1>
+      <child1></child1>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const app = Vue.createApp({
+        components: {
+          Parent: {
+            template: `#Parent`,
+            components: {
+              Child1: {
+                template: `#Child1`,
+                components: {
+                  Child2: {
+                    template: `#Child2`,
+                    components: {
+                      Child3: {
+                        template: `#Child3`,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      const vm = app.mount("#app");
+    </script>
+  </body>
+
+  <html></html>
+</html>
